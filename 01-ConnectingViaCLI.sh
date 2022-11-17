@@ -49,3 +49,49 @@ select now();
 # -----------------------------
 # 2017-02-14 21:45:56.555 UTC
 # (1 row)
+
+
+## Alternative way with Docker image
+## https://hub.docker.com/r/ahanaio/prestodb-sandbox
+## Docker Pull Command:
+docker pull ahanaio/prestodb-sandbox
+
+## Start Presto
+## This will start the Presto server and expose & publish port
+docker run -p 8080:8080 --name presto ahanaio/prestodb-sandbox
+
+## Bring up Presto-cli
+docker exec -it presto  presto-cli
+
+show catalogs;
+ # Catalog
+# ---------
+ # jmx
+ # memory
+ # system
+ # tpcds
+ # tpch
+# (5 rows)
+
+show schemas from tpcds;
+       # Schema
+# --------------------
+ # information_schema
+ # sf1
+ # sf10
+ # sf100
+ # sf1000
+ # sf10000
+ # sf100000
+ # sf300
+ # sf3000
+ # sf30000
+ # tiny
+# (11 rows)
+
+## Choose a catalog and schema to query
+## This can be done by when bringing up the presto-cli
+docker exec -it presto  presto-cli  --catalog tpcds --schema sf10
+
+## Or by choosing the schema on command line
+use tpcds.sf10;

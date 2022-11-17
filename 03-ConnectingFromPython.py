@@ -46,6 +46,7 @@ cur = conn.cursor()
 cur.execute('SELECT * FROM <schema>.<set> LIMIT 10')
 print(cur.fetchall())
 
+
 cur.execute('SELECT * FROM nodes')
 for row in cur.fetchall():
     print(row)
